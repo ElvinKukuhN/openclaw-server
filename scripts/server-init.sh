@@ -91,12 +91,7 @@ mkdir -p workspace logs/openclaw logs/nginx
 chmod 755 workspace logs
 log "Direktori dibuat"
 
-# ── 6. Patch nginx config dengan domain ──────────────────────────
-info "Mengkonfigurasi Nginx untuk domain: $SERVER_DOMAIN"
-sed -i "s/YOUR_DOMAIN_OR_IP/$SERVER_DOMAIN/g" nginx/conf.d/openclaw.conf
-log "Nginx dikonfigurasi"
-
-# ── 7. Onboarding OpenClaw + MiniMax ────────────────────────────
+# ── 6. Onboarding OpenClaw + MiniMax ────────────────────────────
 info "Menjalankan onboarding OpenClaw MiniMax..."
 docker compose pull
 docker compose run --rm --no-deps \
@@ -106,35 +101,12 @@ docker compose run --rm --no-deps \
   dist/index.js onboard --auth-choice minimax-global-api
 log "Onboarding selesai"
 
-# ── 8. Start semua service ───────────────────────────────────────
+# ── 7. Start semua service ───────────────────────────────────────
 info "Menjalankan semua service..."
-docker compose up -d openclaw-gateway nginx watchtower
+docker compose up -d openclaw-gateway watchtower
 log "Service berjalan"
 
-# ── 9. Minta SSL certificate ─────────────────────────────────────
-info "Meminta SSL certificate untuk $SERVER_DOMAIN..."
-sleep 5  # tunggu nginx ready
-
-docker compose run --rm --profile ssl certbot certonly \
-  --webroot \
-  --webroot-path=/var/www/certbot \
-  --email "$CERTBOT_EMAIL" \
-  --agree-tos \
-  --no-eff-email \
-  -d "$SERVER_DOMAIN"
-
-log "SSL certificate berhasil didapat"
-
-# ── 10. Restart nginx untuk load SSL ────────────────────────────
-docker compose restart nginx
-log "Nginx direstart dengan SSL"
-
-# ── 11. Setup cron untuk renew SSL ──────────────────────────────
-info "Setup auto-renew SSL (cron)..."
-(crontab -l 2>/dev/null; echo "0 3 * * * cd $(pwd) && docker compose run --rm --profile ssl certbot renew --quiet && docker compose exec nginx nginx -s reload") | crontab -
-log "Auto-renew SSL dikonfigurasi (cron setiap hari jam 03:00)"
-
-# ── 12. Setup systemd service ────────────────────────────────────
+# ── 8. Setup systemd service ────────────────────────────────────
 info "Membuat systemd service untuk auto-start..."
 cat > /etc/systemd/system/openclaw.service << EOF
 [Unit]

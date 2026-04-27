@@ -7,8 +7,8 @@ services:
     image: ghcr.io/openclaw/openclaw:latest
     container_name: openclaw-gateway
     restart: unless-stopped
-    expose:
-      - "18789"          # tidak expose langsung ke publik, lewat Nginx
+    ports:
+      - "18789:18789"    # Buka port agar bisa diakses Nginx luar
     volumes:
       - openclaw-data:/root/.openclaw
       - ./workspace:/root/workspace
@@ -51,42 +51,6 @@ services:
     entrypoint: ["node", "dist/index.js"]
     restart: "no"
 
-  # ── Nginx Reverse Proxy ──────────────────────────────────────────
-  nginx:
-    image: nginx:alpine
-    container_name: openclaw-nginx
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/conf.d:/etc/nginx/conf.d:ro
-      - certbot-webroot:/var/www/certbot:ro
-      - certbot-certs:/etc/letsencrypt:ro
-      - ./logs/nginx:/var/log/nginx
-    depends_on:
-      - openclaw-gateway
-    networks:
-      - openclaw-internal
-      - openclaw-public
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
-  # ── Certbot (SSL otomatis) ───────────────────────────────────────
-  certbot:
-    image: certbot/certbot:latest
-    container_name: openclaw-certbot
-    volumes:
-      - certbot-webroot:/var/www/certbot
-      - certbot-certs:/etc/letsencrypt
-    profiles:
-      - ssl
-    restart: "no"
-
   # ── Watchtower (auto-update image) ──────────────────────────────
   watchtower:
     image: containrrr/watchtower:latest
@@ -113,15 +77,9 @@ services:
 volumes:
   openclaw-data:
     driver: local
-  certbot-webroot:
-    driver: local
-  certbot-certs:
-    driver: local
 
 # ── Networks ─────────────────────────────────────────────────────
 networks:
   openclaw-internal:
     driver: bridge
-    internal: true          # tidak bisa akses internet langsung
-  openclaw-public:
-    driver: bridge
+    internal: true          # tetap internal agar aman

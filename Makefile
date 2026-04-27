@@ -39,7 +39,7 @@ init:
 
 # ── Service ───────────────────────────────────────────────────────
 start:
-	docker compose up -d openclaw-gateway nginx watchtower
+	docker compose up -d openclaw-gateway watchtower
 	@echo "✅ Semua service berjalan"
 
 stop:
@@ -47,14 +47,11 @@ stop:
 	@echo "🛑 Semua service dihentikan"
 
 restart:
-	docker compose restart openclaw-gateway nginx
+	docker compose restart openclaw-gateway
 	@echo "🔄 Service di-restart"
 
 logs:
 	docker compose logs -f openclaw-gateway
-
-logs-nginx:
-	docker compose logs -f nginx
 
 # ── Monitoring ────────────────────────────────────────────────────
 status:
@@ -78,7 +75,7 @@ update:
 	@bash scripts/update.sh
 
 ssl-renew:
-	@bash scripts/renew-ssl.sh
+	@echo "SSL dikelola oleh Nginx eksternal"
 
 models:
 	docker compose run --rm --profile cli openclaw-cli models list --provider minimax
