@@ -1,0 +1,21 @@
+# ── Secrets ──────────────────────────────────────────────────────
+.env
+
+# ── Data lokal ───────────────────────────────────────────────────
+workspace/*
+!workspace/.gitkeep
+logs/*
+!logs/.gitkeep
+
+# ── SSL certs (dikelola Certbot, jangan commit) ──────────────────
+nginx/certs/
+
+# ── OS ───────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Editor ───────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*~

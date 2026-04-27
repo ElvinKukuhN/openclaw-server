@@ -1,0 +1,36 @@
+name: OpenClaw Server — Health & Update Check
+
+on:
+  schedule:
+    - cron: "0 1 * * *"   # setiap hari jam 01:00 UTC (08:00 WIB)
+  workflow_dispatch:
+
+jobs:
+  check:
+    name: Cek versi OpenClaw terbaru
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cek digest image terbaru
+        id: check
+        run: |
+          docker pull ghcr.io/openclaw/openclaw:latest --quiet
+          DIGEST=$(docker inspect ghcr.io/openclaw/openclaw:latest \
+            --format='{{index .RepoDigests 0}}')
+          echo "digest=$DIGEST" >> $GITHUB_OUTPUT
+          echo "date=$(date '+%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      - name: Buat summary
+        run: |
+          echo "## 🦞 OpenClaw Daily Check — ${{ steps.check.outputs.date }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Image digest terbaru:**" >> $GITHUB_STEP_SUMMARY
+          echo "\`${{ steps.check.outputs.digest }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Untuk update server:" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
+          echo "ssh user@server 'cd /path/to/openclaw-server && make update'" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY

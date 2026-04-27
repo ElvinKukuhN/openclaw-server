@@ -1,0 +1,46 @@
+name: Check OpenClaw Update
+
+on:
+  schedule:
+    # Setiap Senin jam 07:00 WIB (00:00 UTC)
+    - cron: "0 0 * * 1"
+  workflow_dispatch:
+    inputs:
+      force_update:
+        description: "Force update meski versi sama?"
+        required: false
+        default: "false"
+
+jobs:
+  check-update:
+    name: Cek & Notifikasi Update OpenClaw
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Pull image OpenClaw terbaru
+        run: |
+          docker pull ghcr.io/openclaw/openclaw:latest
+          echo "IMAGE_DIGEST=$(docker inspect ghcr.io/openclaw/openclaw:latest --format='{{index .RepoDigests 0}}')" >> $GITHUB_ENV
+
+      - name: Tampilkan info versi
+        run: |
+          echo "✅ Image digest terbaru:"
+          echo "${{ env.IMAGE_DIGEST }}"
+          echo ""
+          echo "Untuk update di server lokal, jalankan:"
+          echo "  bash scripts/update.sh"
+          echo "  atau: make update"
+
+      - name: Buat summary
+        run: |
+          echo "## 🦞 OpenClaw Update Check" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Tanggal check:** $(date '+%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Image digest terbaru:**" >> $GITHUB_STEP_SUMMARY
+          echo "\`${{ env.IMAGE_DIGEST }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Untuk update lokal: \`make update\`" >> $GITHUB_STEP_SUMMARY
