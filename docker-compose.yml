@@ -82,4 +82,4 @@ volumes:
 networks:
   openclaw-internal:
     driver: bridge
-    internal: true          # tetap internal agar aman
+    internal: false          # Harus false agar bisa konek ke API MiniMax
