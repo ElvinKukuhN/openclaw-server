@@ -88,4 +88,8 @@ shell:
 	docker exec -it openclaw-gateway bash
 
 dashboard:
-	docker exec openclaw-gateway openclaw dashboard --no-open
+	@TOKEN=$$(grep -o '"token": "[^"]*"' ./config/openclaw.json | cut -d'"' -f4); \
+	echo ""; \
+	echo "🦞 OpenClaw Dashboard URL:"; \
+	echo "https://ai.elaiproject.site/?token=$$TOKEN"; \
+	echo ""
