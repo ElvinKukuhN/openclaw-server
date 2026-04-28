@@ -66,9 +66,6 @@
         "auth": {
             "mode": "token",
             "token": "cf115514b1fb2b6e65248bd839ef4bcb3357466b518e7f21"
-        },
-        "devicePairing": {
-            "enabled": false
         }
     }
 }

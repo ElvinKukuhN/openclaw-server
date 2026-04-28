@@ -93,3 +93,11 @@ dashboard:
 	echo "🦞 OpenClaw Dashboard URL:"; \
 	echo "https://ai.elaiproject.site/?token=$$TOKEN"; \
 	echo ""
+
+# ── Device Pairing ────────────────────────────────────────────────
+devices:
+	docker exec openclaw-gateway openclaw devices list
+
+approve:
+	@read -p "Request ID: " rid; \
+	docker exec openclaw-gateway openclaw devices approve $$rid
