@@ -12,12 +12,15 @@ services:
     volumes:
       - openclaw-data:/home/node/.openclaw
       - ./workspace:/home/node/.openclaw/workspace
-      - ./config/openclaw.json:/home/node/.openclaw/openclaw.json
+      - ./config:/home/node/.openclaw/config
       - ./logs/openclaw:/home/node/.openclaw/logs
     environment:
       - MINIMAX_API_KEY=${MINIMAX_API_KEY}
       - GATEWAY_TOKEN=${GATEWAY_TOKEN}
       - OPENCLAW_LOG_LEVEL=${OPENCLAW_LOG_LEVEL:-info}
+      - OPENCLAW_CONFIG_PATH=/home/node/.openclaw/config/openclaw.json
+      - GATEWAY_CONTROLUI_ALLOWEDORIGINS=*
+      - GATEWAY_TRUSTEDPROXIES=any
     healthcheck:
       test: ["CMD", "curl", "-sf", "http://localhost:18789/health"]
       interval: 30s
