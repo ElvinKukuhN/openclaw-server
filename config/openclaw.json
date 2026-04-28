@@ -53,7 +53,7 @@
         }
     },
     "gateway": {
-        "bind": "any",
+        "bind": "auto",
         "trustedProxies": [
             "any"
         ],
