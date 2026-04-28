@@ -52,11 +52,6 @@
             }
         }
     },
-    "plugins": {
-        "bonjour": {
-            "enabled": false
-        }
-    },
     "gateway": {
         "bind": "auto",
         "trustedProxies": [

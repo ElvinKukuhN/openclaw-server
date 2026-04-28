@@ -19,10 +19,10 @@ services:
       - GATEWAY_TOKEN=${GATEWAY_TOKEN}
       - OPENCLAW_LOG_LEVEL=${OPENCLAW_LOG_LEVEL:-info}
       - OPENCLAW_CONFIG_PATH=/home/node/.openclaw/config/openclaw.json
-      - GATEWAY_CONTROLUI_ALLOWEDORIGINS=*
-      - GATEWAY_TRUSTEDPROXIES=any
-      - OPENCLAW_PLUGINS_BONJOUR_ENABLED=false
-      - OPENCLAW_PLUGINS_DISABLED=bonjour
+      # - GATEWAY_CONTROLUI_ALLOWEDORIGINS=*
+      # - GATEWAY_TRUSTEDPROXIES=any
+      # - OPENCLAW_PLUGINS_BONJOUR_ENABLED=false
+      # - OPENCLAW_PLUGINS_DISABLED=bonjour
     healthcheck:
       test: ["CMD", "curl", "-sf", "http://localhost:18789/health"]
       interval: 30s
