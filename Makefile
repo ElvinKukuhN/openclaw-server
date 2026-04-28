@@ -88,4 +88,4 @@ shell:
 	docker exec -it openclaw-gateway bash
 
 dashboard:
-	docker compose run --rm --profile cli openclaw-cli dashboard --no-open
+	docker exec openclaw-gateway openclaw dashboard --no-open
