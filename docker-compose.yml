@@ -12,7 +12,7 @@ services:
     volumes:
       - openclaw-data:/root/.openclaw
       - ./workspace:/root/workspace
-      - ./config:/root/.openclaw/config
+      - ./config/openclaw.json:/root/.openclaw/config.json
       - ./logs/openclaw:/root/.openclaw/logs
     environment:
       - MINIMAX_API_KEY=${MINIMAX_API_KEY}
