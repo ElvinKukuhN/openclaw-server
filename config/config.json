@@ -57,6 +57,11 @@
         "trustedProxies": [
             "any"
         ],
+        "plugins": {
+            "bonjour": {
+                "enabled": false
+            }
+        },
         "controlUi": {
             "allowedOrigins": [
                 "*",
