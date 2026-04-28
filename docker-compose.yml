@@ -4,7 +4,7 @@ services:
 
   # ── OpenClaw Gateway ─────────────────────────────────────────────
   openclaw-gateway:
-    image: ghcr.io/openclaw/openclaw:latest
+    image: ghcr.io/openclaw/openclaw:2026.4.25
     container_name: openclaw-gateway
     restart: unless-stopped
     user: "1000:1000"
@@ -40,7 +40,7 @@ services:
 
   # ── OpenClaw CLI (jalankan on-demand) ────────────────────────────
   openclaw-cli:
-    image: ghcr.io/openclaw/openclaw:latest
+    image: ghcr.io/openclaw/openclaw:2026.4.25
     container_name: openclaw-cli
     network_mode: "service:openclaw-gateway"
     volumes:
