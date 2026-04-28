@@ -46,6 +46,10 @@ stop:
 	docker compose stop
 	@echo "🛑 Semua service dihentikan"
 
+down:
+	docker compose down
+	@echo "🗑️ Semua service dihapus"
+
 restart:
 	docker compose restart openclaw-gateway
 	@echo "🔄 Service di-restart"
