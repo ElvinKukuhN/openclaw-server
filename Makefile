@@ -32,6 +32,10 @@ help:
 	@echo "  make shell         → Shell ke dalam container gateway"
 	@echo "  make dashboard     → Tampilkan URL dashboard"
 	@echo ""
+	@echo "  DEVICE"
+	@echo "  make devices       → Lihat daftar device pending"
+	@echo "  make approve       → Approve device (input Request ID)"
+	@echo ""
 
 # ── Setup ─────────────────────────────────────────────────────────
 init:
