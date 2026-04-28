@@ -10,10 +10,10 @@ services:
     ports:
       - "18789:18789"    # Buka port agar bisa diakses Nginx luar
     volumes:
-      - openclaw-data:/root/.openclaw
-      - ./workspace:/root/workspace
-      - ./config/openclaw.json:/root/.openclaw/config.json
-      - ./logs/openclaw:/root/.openclaw/logs
+      - openclaw-data:/home/node/.openclaw
+      - ./workspace:/home/node/.openclaw/workspace
+      - ./config/openclaw.json:/home/node/.openclaw/openclaw.json
+      - ./logs/openclaw:/home/node/.openclaw/logs
     environment:
       - MINIMAX_API_KEY=${MINIMAX_API_KEY}
       - GATEWAY_TOKEN=${GATEWAY_TOKEN}
@@ -38,8 +38,8 @@ services:
     container_name: openclaw-cli
     network_mode: "service:openclaw-gateway"
     volumes:
-      - openclaw-data:/root/.openclaw
-      - ./workspace:/root/workspace
+      - openclaw-data:/home/node/.openclaw
+      - ./workspace:/home/node/.openclaw/workspace
     environment:
       - MINIMAX_API_KEY=${MINIMAX_API_KEY}
       - GATEWAY_TOKEN=${GATEWAY_TOKEN}
