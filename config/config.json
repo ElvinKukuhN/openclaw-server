@@ -52,16 +52,16 @@
             }
         }
     },
+    "plugins": {
+        "bonjour": {
+            "enabled": false
+        }
+    },
     "gateway": {
         "bind": "auto",
         "trustedProxies": [
             "any"
         ],
-        "plugins": {
-            "bonjour": {
-                "enabled": false
-            }
-        },
         "controlUi": {
             "allowedOrigins": [
                 "*",
