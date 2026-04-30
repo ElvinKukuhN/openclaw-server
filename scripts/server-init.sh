@@ -12,8 +12,8 @@ err()  { echo -e "${RED}[✗]${NC} $1"; exit 1; }
 info() { echo -e "${BLUE}[→]${NC} $1"; }
 
 echo ""
-echo "🦞 OpenClaw + MiniMax — Server Init (Ubuntu 22.04/24.04)"
-echo "══════════════════════════════════════════════════════════"
+echo "🦞 OpenClaw + Gemini 2.5 Flash — Server Init (Ubuntu 22.04/24.04)"
+echo "════════════════════════════════════════════════════════════════════"
 echo ""
 
 # ── Cek root ─────────────────────────────────────────────────────
@@ -30,8 +30,8 @@ fi
 
 set -a; source .env; set +a
 
-[ -z "$MINIMAX_API_KEY" ] || [ "$MINIMAX_API_KEY" = "sk-your-minimax-api-key-here" ] && \
-  err "MINIMAX_API_KEY belum diisi di .env!"
+[ -z "$GEMINI_API_KEY" ] || [ "$GEMINI_API_KEY" = "your-gemini-api-key-here" ] && \
+  err "GEMINI_API_KEY belum diisi di .env!"
 [ -z "$SERVER_DOMAIN" ] || [ "$SERVER_DOMAIN" = "your-server-ip-or-domain" ] && \
   err "SERVER_DOMAIN belum diisi di .env!"
 [ -z "$CERTBOT_EMAIL" ] || [ "$CERTBOT_EMAIL" = "your@email.com" ] && \
@@ -91,14 +91,14 @@ mkdir -p workspace logs/openclaw logs/nginx
 chmod 755 workspace logs
 log "Direktori dibuat"
 
-# ── 6. Onboarding OpenClaw + MiniMax ────────────────────────────
-info "Menjalankan onboarding OpenClaw MiniMax..."
+# ── 6. Onboarding OpenClaw + Gemini ─────────────────────────────
+info "Menjalankan onboarding OpenClaw Gemini 2.5 Flash..."
 docker compose pull
 docker compose run --rm --no-deps \
   --entrypoint node \
-  -e MINIMAX_API_KEY="${MINIMAX_API_KEY}" \
+  -e GEMINI_API_KEY="${GEMINI_API_KEY}" \
   openclaw-gateway \
-  dist/index.js onboard --auth-choice minimax-global-api
+  dist/index.js onboard --auth-choice google-gemini-api
 log "Onboarding selesai"
 
 # ── 7. Start semua service ───────────────────────────────────────
@@ -142,4 +142,4 @@ echo ""
 echo "⚠️  Langkah selanjutnya:"
 echo "  1. Tambah channel Telegram  : make telegram"
 echo "  2. Ambil dashboard URL      : make dashboard"
-echo "  3. Cek model MiniMax        : make models"
+echo "  3. Cek model Gemini         : make models"
