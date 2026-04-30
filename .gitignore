@@ -19,6 +19,6 @@ Thumbs.db
 .idea/
 *.swp
 *~# OpenClaw runtime config (di-generate otomatis)
-config/openclaw.json
+# config/openclaw.json
 config/openclaw.json.*
 workspace/
