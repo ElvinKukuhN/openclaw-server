@@ -28,7 +28,7 @@ help:
 	@echo "  MAINTENANCE"
 	@echo "  make update        → Update OpenClaw ke versi terbaru"
 	@echo "  make ssl-renew     → Renew SSL certificate manual"
-	@echo "  make models        → Cek model MiniMax tersedia"
+	@echo "  make models        → Cek model Gemini tersedia"
 	@echo "  make shell         → Shell ke dalam container gateway"
 	@echo "  make dashboard     → Tampilkan URL dashboard"
 	@echo ""
@@ -86,7 +86,7 @@ ssl-renew:
 	@echo "SSL dikelola oleh Nginx eksternal"
 
 models:
-	docker compose run --rm --profile cli openclaw-cli models list --provider minimax
+	docker compose run --rm --profile cli openclaw-cli models list --provider google
 
 shell:
 	docker exec -it openclaw-gateway bash
