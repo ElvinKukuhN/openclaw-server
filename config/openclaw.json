@@ -2,7 +2,7 @@
   "agents": {
     "defaults": {
       "model": {
-        "primary": "google/gemini-2.5-flash"
+        "primary": "sumopod/gemini/gemini-2.5-flash"
       }
     },
     "list": [
@@ -10,56 +10,56 @@
         "id": "product-manager",
         "name": "Product Manager",
         "model": {
-          "primary": "google/gemini-2.5-flash"
+          "primary": "sumopod/gemini/gemini-2.5-flash"
         }
       },
       {
         "id": "system-analyst",
         "name": "System Analyst",
         "model": {
-          "primary": "google/gemini-2.5-flash"
+          "primary": "sumopod/gemini/gemini-2.5-flash"
         }
       },
       {
         "id": "frontend-dev",
         "name": "Frontend Developer",
         "model": {
-          "primary": "google/gemini-2.5-flash"
+          "primary": "sumopod/deepseek-v4-pro"
         }
       },
       {
         "id": "backend-dev",
         "name": "Backend Developer",
         "model": {
-          "primary": "google/gemini-2.5-flash"
+          "primary": "sumopod/deepseek-v4-pro"
         }
       },
       {
         "id": "devops-sre",
         "name": "DevOps / SRE",
         "model": {
-          "primary": "google/gemini-2.5-flash"
+          "primary": "sumopod/deepseek-v4-flash"
         }
       },
       {
         "id": "qa-tester",
         "name": "QA Tester",
         "model": {
-          "primary": "google/gemini-2.5-flash"
+          "primary": "sumopod/gpt-4o-mini"
         }
       },
       {
         "id": "database-admin",
         "name": "Database Administrator",
         "model": {
-          "primary": "google/gemini-2.5-flash"
+          "primary": "sumopod/deepseek-v4-pro"
         }
       },
       {
         "id": "data-engineer",
         "name": "Data Engineer",
         "model": {
-          "primary": "google/gemini-2.5-flash"
+          "primary": "sumopod/deepseek-v4-pro"
         }
       }
     ]
@@ -90,6 +90,45 @@
             },
             "contextWindow": 1048576,
             "maxTokens": 65536
+          }
+        ]
+      },
+      "sumopod": {
+        "baseUrl": "https://ai.sumopod.com/v1",
+        "apiKey": "${SUMOPOD_API_KEY}",
+        "api": "openai",
+        "models": [
+          {
+            "id": "gemini/gemini-2.5-flash",
+            "name": "Gemini 2.5 Flash",
+            "input": ["text", "image"],
+            "contextWindow": 1048576,
+            "maxTokens": 65536,
+            "cost": { "input": 0.30, "output": 2.50 }
+          },
+          {
+            "id": "deepseek-v4-pro",
+            "name": "DeepSeek V4 Pro",
+            "input": ["text"],
+            "contextWindow": 1000000,
+            "maxTokens": 65536,
+            "cost": { "input": 0.43, "output": 0.87 }
+          },
+          {
+            "id": "deepseek-v4-flash",
+            "name": "DeepSeek V4 Flash",
+            "input": ["text"],
+            "contextWindow": 1000000,
+            "maxTokens": 65536,
+            "cost": { "input": 0.14, "output": 0.28 }
+          },
+          {
+            "id": "gpt-4o-mini",
+            "name": "GPT-4o Mini",
+            "input": ["text"],
+            "contextWindow": 128000,
+            "maxTokens": 16384,
+            "cost": { "input": 0.15, "output": 0.60 }
           }
         ]
       }
