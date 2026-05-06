@@ -2,219 +2,65 @@
   "agents": {
     "defaults": {
       "model": {
-        "primary": "google/gemini-2.5-flash"
+        "primary": "sumopod/gemini/gemini-2.5-flash"
       }
     },
     "list": [
       {
         "id": "product-manager",
         "name": "Product Manager",
-        "role": "IT Division Lead",
-        "description": "Koordinator divisi IT. Menerima permintaan awal, memecah kebutuhan, dan mendistribusikan tugas ke agen lain.",
         "model": {
-          "primary": "google/gemini-2.5-flash"
-        },
-        "systemPrompt": "Kamu adalah Product Manager di divisi IT. Tugasmu: menerima permintaan dari user, memahami kebutuhan bisnis, mendefinisikan user stories, dan mendelegasikan ke agen teknis yang sesuai (Frontend Dev, Backend Dev, DevOps, QA, Database Admin, System Analyst, atau Data Engineer). Selalu tulis ringkasan keputusan dalam format terstruktur.",
-        "capabilities": [
-          "requirement_gathering",
-          "task_delegation",
-          "sprint_planning",
-          "stakeholder_communication"
-        ],
-        "canDelegateTo": [
-          "system-analyst",
-          "frontend-dev",
-          "backend-dev",
-          "devops-sre",
-          "qa-tester",
-          "database-admin",
-          "data-engineer"
-        ]
+          "primary": "sumopod/gemini/gemini-2.5-flash"
+        }
       },
       {
         "id": "system-analyst",
         "name": "System Analyst",
-        "role": "IT Division",
-        "description": "Menganalisis kebutuhan sistem, membuat spesifikasi teknis, dan menjembatani bisnis dengan tim teknis.",
         "model": {
-          "primary": "google/gemini-2.5-flash"
-        },
-        "systemPrompt": "Kamu adalah System Analyst di divisi IT. Tugasmu: menganalisis kebutuhan bisnis, membuat dokumen BRD/SRS/FSD, merancang alur sistem (flowchart, ERD, use case), dan memastikan semua tim teknis memahami spesifikasi. Selalu gunakan notasi standar seperti UML atau BPMN.",
-        "capabilities": [
-          "requirements_analysis",
-          "system_design",
-          "documentation",
-          "process_modeling",
-          "feasibility_study"
-        ],
-        "canDelegateTo": [
-          "frontend-dev",
-          "backend-dev",
-          "database-admin"
-        ]
+          "primary": "sumopod/gemini/gemini-2.5-flash"
+        }
       },
       {
         "id": "frontend-dev",
         "name": "Frontend Developer",
-        "role": "IT Division",
-        "description": "Membangun antarmuka pengguna (UI) dan pengalaman pengguna (UX) berbasis web atau mobile.",
         "model": {
-          "primary": "google/gemini-2.5-flash"
-        },
-        "systemPrompt": "Kamu adalah Frontend Developer di divisi IT. Tugasmu: membangun UI/UX menggunakan HTML, CSS, JavaScript (React/Vue/Next.js), memastikan responsivitas, aksesibilitas, dan performa. Selalu konsultasikan desain dengan spesifikasi dari System Analyst dan API contract dari Backend Dev.",
-        "capabilities": [
-          "ui_development",
-          "responsive_design",
-          "state_management",
-          "api_integration",
-          "performance_optimization"
-        ],
-        "techStack": [
-          "React",
-          "Next.js",
-          "Vue",
-          "TypeScript",
-          "TailwindCSS"
-        ],
-        "canDelegateTo": []
+          "primary": "sumopod/deepseek-v4-pro"
+        }
       },
       {
         "id": "backend-dev",
         "name": "Backend Developer",
-        "role": "IT Division",
-        "description": "Membangun logika bisnis, REST/GraphQL API, dan integrasi layanan backend.",
         "model": {
-          "primary": "google/gemini-2.5-flash"
-        },
-        "systemPrompt": "Kamu adalah Backend Developer di divisi IT. Tugasmu: merancang dan membangun API (REST/GraphQL), mengimplementasikan business logic, integrasi third-party services, autentikasi/otorisasi, dan optimasi performa server. Koordinasikan API contract dengan Frontend Dev dan skema database dengan Database Admin.",
-        "capabilities": [
-          "api_development",
-          "business_logic",
-          "authentication",
-          "third_party_integration",
-          "microservices"
-        ],
-        "techStack": [
-          "Node.js",
-          "Python",
-          "Go",
-          "FastAPI",
-          "Express",
-          "PostgreSQL",
-          "Redis"
-        ],
-        "canDelegateTo": [
-          "database-admin",
-          "devops-sre"
-        ]
+          "primary": "sumopod/deepseek-v4-pro"
+        }
       },
       {
         "id": "devops-sre",
         "name": "DevOps / SRE",
-        "role": "IT Division",
-        "description": "Mengelola infrastruktur, CI/CD pipeline, monitoring, dan ketersediaan layanan.",
         "model": {
-          "primary": "google/gemini-2.5-flash"
-        },
-        "systemPrompt": "Kamu adalah DevOps/SRE di divisi IT. Tugasmu: merancang dan mengelola infrastruktur cloud (AWS/GCP/Azure), CI/CD pipeline, container orchestration (Kubernetes/Docker), monitoring & alerting (Grafana, Prometheus), dan memastikan SLA/SLO terpenuhi. Selalu prioritaskan keamanan dan availability.",
-        "capabilities": [
-          "ci_cd_pipeline",
-          "infrastructure_as_code",
-          "container_orchestration",
-          "monitoring_alerting",
-          "incident_response"
-        ],
-        "techStack": [
-          "Docker",
-          "Kubernetes",
-          "Terraform",
-          "GitHub Actions",
-          "Prometheus",
-          "Grafana"
-        ],
-        "canDelegateTo": []
+          "primary": "sumopod/deepseek-v4-flash"
+        }
       },
       {
         "id": "qa-tester",
         "name": "QA Tester",
-        "role": "IT Division",
-        "description": "Memastikan kualitas produk melalui pengujian fungsional, performa, dan keamanan.",
         "model": {
-          "primary": "google/gemini-2.5-flash"
-        },
-        "systemPrompt": "Kamu adalah QA Tester di divisi IT. Tugasmu: membuat test plan, test case, dan melaksanakan pengujian (functional, regression, performance, security testing). Laporkan bug dengan detail reproduksi yang jelas. Koordinasikan dengan Frontend Dev dan Backend Dev untuk fix, dan dengan DevOps untuk testing di environment staging.",
-        "capabilities": [
-          "test_planning",
-          "manual_testing",
-          "automation_testing",
-          "performance_testing",
-          "bug_reporting"
-        ],
-        "techStack": [
-          "Selenium",
-          "Playwright",
-          "Jest",
-          "Postman",
-          "JMeter",
-          "Cypress"
-        ],
-        "canDelegateTo": [
-          "frontend-dev",
-          "backend-dev"
-        ]
+          "primary": "sumopod/gpt-4o-mini"
+        }
       },
       {
         "id": "database-admin",
         "name": "Database Administrator",
-        "role": "IT Division",
-        "description": "Merancang, mengelola, dan mengoptimalkan database untuk kebutuhan sistem.",
         "model": {
-          "primary": "google/gemini-2.5-flash"
-        },
-        "systemPrompt": "Kamu adalah Database Administrator (DBA) di divisi IT. Tugasmu: merancang skema database, optimasi query, manajemen backup & recovery, replikasi, serta keamanan data. Berikan rekomendasi terkait pemilihan database (SQL vs NoSQL) berdasarkan use case dari Backend Dev dan System Analyst.",
-        "capabilities": [
-          "schema_design",
-          "query_optimization",
-          "backup_recovery",
-          "replication",
-          "data_security"
-        ],
-        "techStack": [
-          "PostgreSQL",
-          "MySQL",
-          "MongoDB",
-          "Redis",
-          "Elasticsearch"
-        ],
-        "canDelegateTo": []
+          "primary": "sumopod/deepseek-v4-pro"
+        }
       },
       {
         "id": "data-engineer",
         "name": "Data Engineer",
-        "role": "IT Division",
-        "description": "Membangun pipeline data, data warehouse, dan infrastruktur analitik untuk kebutuhan bisnis.",
         "model": {
-          "primary": "google/gemini-2.5-flash"
-        },
-        "systemPrompt": "Kamu adalah Data Engineer di divisi IT. Tugasmu: membangun dan mengelola ETL/ELT pipeline, data warehouse, data lake, dan memastikan data berkualitas tinggi untuk kebutuhan analitik dan ML. Koordinasikan kebutuhan data dengan Product Manager dan Database Admin.",
-        "capabilities": [
-          "etl_pipeline",
-          "data_warehouse",
-          "data_lake",
-          "stream_processing",
-          "data_quality"
-        ],
-        "techStack": [
-          "Apache Spark",
-          "Airflow",
-          "dbt",
-          "BigQuery",
-          "Kafka",
-          "Snowflake"
-        ],
-        "canDelegateTo": [
-          "database-admin"
-        ]
+          "primary": "sumopod/deepseek-v4-pro"
+        }
       }
     ]
   },
@@ -224,7 +70,7 @@
       "google": {
         "baseUrl": "https://generativelanguage.googleapis.com/v1beta/openai",
         "apiKey": "${GEMINI_API_KEY}",
-        "api": "openai-chat",
+        "api": "google-generative-ai",
         "models": [
           {
             "id": "gemini-2.5-flash",
@@ -246,99 +92,46 @@
             "maxTokens": 65536
           }
         ]
+      },
+      "sumopod": {
+        "baseUrl": "https://ai.sumopod.com/v1",
+        "apiKey": "${SUMOPOD_API_KEY}",
+        "api": "openai",
+        "models": [
+          {
+            "id": "gemini/gemini-2.5-flash",
+            "name": "Gemini 2.5 Flash",
+            "input": ["text", "image"],
+            "contextWindow": 1048576,
+            "maxTokens": 65536,
+            "cost": { "input": 0.30, "output": 2.50 }
+          },
+          {
+            "id": "deepseek-v4-pro",
+            "name": "DeepSeek V4 Pro",
+            "input": ["text"],
+            "contextWindow": 1000000,
+            "maxTokens": 65536,
+            "cost": { "input": 0.43, "output": 0.87 }
+          },
+          {
+            "id": "deepseek-v4-flash",
+            "name": "DeepSeek V4 Flash",
+            "input": ["text"],
+            "contextWindow": 1000000,
+            "maxTokens": 65536,
+            "cost": { "input": 0.14, "output": 0.28 }
+          },
+          {
+            "id": "gpt-4o-mini",
+            "name": "GPT-4o Mini",
+            "input": ["text"],
+            "contextWindow": 128000,
+            "maxTokens": 16384,
+            "cost": { "input": 0.15, "output": 0.60 }
+          }
+        ]
       }
-    }
-  },
-  "workflows": {
-    "new_feature": {
-      "name": "New Feature Development",
-      "description": "Alur kerja untuk pengembangan fitur baru dari awal hingga produksi",
-      "steps": [
-        {
-          "agent": "product-manager",
-          "action": "Requirement gathering & task breakdown"
-        },
-        {
-          "agent": "system-analyst",
-          "action": "System design & technical specification"
-        },
-        {
-          "agent": "database-admin",
-          "action": "Schema design & migration"
-        },
-        {
-          "agent": "backend-dev",
-          "action": "API development & business logic"
-        },
-        {
-          "agent": "frontend-dev",
-          "action": "UI/UX implementation"
-        },
-        {
-          "agent": "qa-tester",
-          "action": "Testing & bug reporting"
-        },
-        {
-          "agent": "devops-sre",
-          "action": "Deployment & monitoring"
-        }
-      ]
-    },
-    "bug_fix": {
-      "name": "Bug Fix",
-      "description": "Alur kerja untuk penanganan bug",
-      "steps": [
-        {
-          "agent": "qa-tester",
-          "action": "Bug verification & reproduction"
-        },
-        {
-          "agent": "backend-dev",
-          "action": "Root cause analysis & fix"
-        },
-        {
-          "agent": "frontend-dev",
-          "action": "UI fix if needed"
-        },
-        {
-          "agent": "qa-tester",
-          "action": "Regression testing"
-        },
-        {
-          "agent": "devops-sre",
-          "action": "Hotfix deployment"
-        }
-      ]
-    },
-    "data_pipeline": {
-      "name": "Data Pipeline Setup",
-      "description": "Alur kerja untuk membangun pipeline data baru",
-      "steps": [
-        {
-          "agent": "product-manager",
-          "action": "Define data requirements"
-        },
-        {
-          "agent": "system-analyst",
-          "action": "Data flow design"
-        },
-        {
-          "agent": "database-admin",
-          "action": "Storage & schema setup"
-        },
-        {
-          "agent": "data-engineer",
-          "action": "ETL pipeline development"
-        },
-        {
-          "agent": "qa-tester",
-          "action": "Data quality validation"
-        },
-        {
-          "agent": "devops-sre",
-          "action": "Pipeline deployment & scheduling"
-        }
-      ]
     }
   },
   "gateway": {
