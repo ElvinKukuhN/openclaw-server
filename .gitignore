@@ -2,7 +2,7 @@
 .env
 
 # ── Data lokal ───────────────────────────────────────────────────
-workspace/*
+# workspace/*
 !workspace/.gitkeep
 logs/*
 !logs/.gitkeep
