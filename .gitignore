@@ -21,4 +21,3 @@ Thumbs.db
 *~# OpenClaw runtime config (di-generate otomatis)
 # config/openclaw.json
 config/openclaw.json.*
-workspace/
