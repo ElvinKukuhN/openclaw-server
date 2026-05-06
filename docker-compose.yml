@@ -13,6 +13,13 @@ services:
     volumes:
       - openclaw-data:/home/node/.openclaw
       - ./workspace:/home/node/.openclaw/workspace
+      - ./workspace-backend-dev:/home/node/.openclaw/workspace-backend-dev
+      - ./workspace-data-engineer:/home/node/.openclaw/workspace-data-engineer
+      - ./workspace-frontend-dev:/home/node/.openclaw/workspace-frontend-dev
+      - ./workspace-devops-sre:/home/node/.openclaw/workspace-devops-sre
+      - ./workspace-qa-tester:/home/node/.openclaw/workspace-qa-tester
+      - ./workspace-database-admin:/home/node/.openclaw/workspace-database-admin
+      - ./workspace-system-analyst:/home/node/.openclaw/workspace-system-analyst
       - ./config:/home/node/.openclaw/config
       - ./logs/openclaw:/home/node/.openclaw/logs
     environment:
