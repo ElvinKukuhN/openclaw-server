@@ -24,6 +24,7 @@ services:
       - ./logs/openclaw:/home/node/.openclaw/logs
     environment:
       - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - SUMOPOD_API_KEY=${SUMOPOD_API_KEY}
       - GATEWAY_TOKEN=${GATEWAY_TOKEN}
       - OPENCLAW_LOG_LEVEL=${OPENCLAW_LOG_LEVEL:-info}
       - OPENCLAW_CONFIG_PATH=/home/node/.openclaw/config/openclaw.json
@@ -55,6 +56,7 @@ services:
       - ./workspace:/home/node/.openclaw/workspace
     environment:
       - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - SUMOPOD_API_KEY=${SUMOPOD_API_KEY}
       - GATEWAY_TOKEN=${GATEWAY_TOKEN}
     depends_on:
       openclaw-gateway:
